@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết Tour Thuyền Rồng - Hue Transport Services</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === KẾT THỪA STYLE CƠ BẢN TỪ TRANG CHỦ === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+      body {
+        color: #333;
+        background-color: #fcfcfc;
+        line-height: 1.6;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* === HEADER === */
+      header {
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        color: #6d4c41;
+        font-size: 20px;
+      }
+      .logo i {
+        font-size: 28px;
+        margin-right: 10px;
+        color: #d4a373;
+      }
+      nav ul {
+        display: flex;
+        gap: 25px;
+      }
+      nav ul li a {
+        font-weight: 600;
+        font-size: 15px;
+        transition: color 0.3s;
+        text-transform: uppercase;
+      }
+      nav ul li a:hover {
+        color: #d4a373;
+      }
+
+      /* === BREADCRUMB === */
+      .breadcrumb {
+        padding: 20px 0;
+        font-size: 14px;
+        color: #666;
+      }
+      .breadcrumb a {
+        color: #a67c52;
+        font-weight: 600;
+      }
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      /* === CHI TIẾT SẢN PHẨM / DỊCH VỤ === */
+      .service-detail {
+        padding: 40px 0;
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      /* Cột trái: Hình ảnh */
+      .service-gallery {
+        flex: 1;
+        min-width: 300px;
+      }
+      .main-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.3s ease;
+      }
+      .thumbnail-list {
+        display: flex;
+        gap: 10px;
+      }
+      .thumbnail-list img {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+      .thumbnail-list img:hover,
+      .thumbnail-list img.active {
+        border-color: #a67c52;
+      }
+
+      /* Cột phải: Thông tin & Đặt hàng */
+      .service-info {
+        flex: 1;
+        min-width: 300px;
+      }
+      .service-info h1 {
+        font-size: 32px;
+        color: #222;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+      .service-info .price {
+        font-size: 28px;
+        font-weight: 700;
+        color: #b71c1c;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .short-desc {
+        margin-bottom: 25px;
+        color: #555;
+      }
+
+      .features-list {
+        margin-bottom: 30px;
+      }
+      .features-list li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .features-list i {
+        color: #2e7d32;
+        margin-right: 10px;
+        font-size: 18px;
+        width: 20px;
+        text-align: center;
+      }
+
+      /* Khung liên hệ / Đặt xe */
+      .booking-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border-top: 4px solid #a67c52;
+      }
+      .booking-card h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      .btn-large {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: #a67c52;
+        color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        border: none;
+        margin-bottom: 15px;
+      }
+      .btn-large:hover {
+        background-color: #8b633e;
+      }
+      .btn-zalo {
+        background-color: #0068ff;
+      }
+      .btn-zalo:hover {
+        background-color: #0056d6;
+      }
+
+      /* Phần Tab Nội dung chi tiết dưới cùng */
+      .content-section {
+        margin-top: 50px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+      .content-section h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        color: #4a301e;
+      }
+      .content-section p {
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+      .content-section ul {
+        margin-left: 20px;
+        margin-bottom: 15px;
+        list-style-type: none;
+        padding: 0;
+      }
+      .content-section ul li {
+        margin-bottom: 12px;
+        padding-left: 15px;
+        position: relative;
+      }
+      .content-section ul li::before {
+        content: "•";
+        color: #a67c52;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      /* === FOOTER === */
+      footer {
+        background-color: #4a301e;
+        color: #fff;
+        padding: 40px 0 20px;
+        font-size: 14px;
+        margin-top: 60px;
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .footer-social a {
+        color: #fff;
+        font-size: 20px;
+        margin: 0 10px;
+        transition: 0.3s;
+      }
+      .footer-social a:hover {
+        color: #d4a373;
+      }
+      .footer-bottom {
+        text-align: center;
+        color: #ccc;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .header-inner {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .service-detail {
+          flex-direction: column;
+        }
+        .footer-inner {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="fa-solid fa-dharmachakra"></i> HUE TRANSPORT
+        </a>
+        <nav>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="index.html#services">Dịch vụ</a></li>
+            <li><a href="#">Bảng giá</a></li>
+            <li><a href="index.html#tours" class="active">Tour gợi ý</a></li>
+            <li><a href="#">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a> &nbsp; / &nbsp;
+        <a href="index.html#tours">Tour gợi ý</a> &nbsp; / &nbsp;
+        <span>Tour Thuyền rồng & Ca Huế</span>
+      </div>
+    </div>
+
+    <main class="container">
+      <div class="service-detail">
+        <div class="service-gallery">
+          <img
+            src="https://images.unsplash.com/photo-1520188740392-671c08eb5430?auto=format&fit=crop&w=800&q=80"
+            alt="Thuyền rồng Ca Huế"
+            class="main-img"
+            id="mainImage"
+          />
+          <div class="thumbnail-list">
+            <img
+              src="https://images.unsplash.com/photo-1520188740392-671c08eb5430?auto=format&fit=crop&w=200&q=80"
+              data-large="https://images.unsplash.com/photo-1520188740392-671c08eb5430?auto=format&fit=crop&w=800&q=80"
+              alt="Hoa đăng"
+              class="active"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=200&q=80"
+              data-large="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80"
+              alt="Thuyền rồng sông Hương"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=200&q=80"
+              data-large="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80"
+              alt="Nghe ca Huế"
+            />
+          </div>
+        </div>
+
+        <div class="service-info">
+          <h1>Tour Thuyền Rồng & Nghe Ca Huế Trên Sông Hương</h1>
+          <span class="price">100.000 VNĐ / Khách</span>
+
+          <p class="short-desc">
+            Trải nghiệm 1 giờ đồng hồ lênh đênh trên dòng Hương Giang thơ mộng,
+            thưởng thức những làn điệu Ca Huế mộc mạc, đậm đà bản sắc và tự tay
+            thả những chiếc hoa đăng cầu bình an.
+          </p>
+
+          <ul class="features-list">
+            <li>
+              <i class="fa-solid fa-clock"></i> Thời lượng: 1 tiếng (Có các suất
+              lúc 19:00, 20:00 và 21:00 hàng ngày).
+            </li>
+            <li>
+              <i class="fa-solid fa-music"></i> Thưởng thức di sản văn hóa phi
+              vật thể Ca Huế trực tiếp trên thuyền rồng đôi.
+            </li>
+            <li>
+              <i class="fa-solid fa-fire-flame-curved"></i> Miễn phí 1 chiếc đèn
+              hoa đăng cho mỗi quý khách để thả xuống sông Hương.
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot"></i> Điểm đón/trả khách: Bến
+              thuyền Tòa Khâm (49 Lê Lợi, TP. Huế).
+            </li>
+          </ul>
+
+          <div class="booking-card">
+            <h3>Mua vé trước để không lo hết chỗ</h3>
+            <a href="tel:0901234567" class="btn-large"
+              ><i class="fa-solid fa-phone"></i> Gọi ngay: 090 123 4567</a
+            >
+            <a
+              href="https://zalo.me/0901234567"
+              target="_blank"
+              class="btn-large btn-zalo"
+              ><i class="fa-solid fa-comment-dots"></i> Chat qua Zalo đặt vé</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h2>Lịch Trình Chi Tiết Đêm Nghe Ca Huế (Tham khảo suất 19:00)</h2>
+
+        <p>
+          <strong>18:45 - Tập trung:</strong> Quý khách tự túc di chuyển đến Bến
+          thuyền Tòa Khâm (Số 49 đường Lê Lợi, TP. Huế). Nhận vé từ nhân viên và
+          di chuyển xuống thuyền rồng kép đã chờ sẵn.
+        </p>
+
+        <p>
+          <strong>19:00 - Khởi hành:</strong> Thuyền rồng rảo nhịp rời bến, từ
+          từ trôi trên dòng sông Hương. Quý khách có cơ hội ngắm nhìn cầu Trường
+          Tiền rực rỡ sắc màu đổi liên tục trong đêm.
+        </p>
+
+        <p>
+          <strong>19:15 - Thưởng thức Ca Huế:</strong> Các nghệ sĩ, ca sĩ trong
+          tà áo dài truyền thống bắt đầu biểu diễn các nhạc cụ dân tộc (đàn bầu,
+          đàn tranh, đàn nhị...) và cất lên những điệu hò, điệu lý (Lý Mười
+          Thương, Tương Tư Khúc...) ngọt ngào, sâu lắng làm say lòng người.
+        </p>
+
+        <p>
+          <strong>19:45 - Giao lưu và Thả hoa đăng:</strong> Quý khách được phát
+          mỗi người một chiếc hoa đăng giấy nhỏ xinh. Mọi người cùng thắp nến,
+          nhắm mắt cầu nguyện và thả hoa đăng trôi theo dòng nước mang lại cảm
+          giác bình yên, thiêng liêng.
+        </p>
+
+        <p>
+          <strong>20:00 - Cập bến:</strong> Thuyền rồng đưa quý khách quay trở
+          lại bến Tòa Khâm. Kết thúc chương trình nghe ca Huế 1 tiếng đầy cảm
+          xúc.
+        </p>
+
+        <br />
+        <h3>Chính sách vé trẻ em:</h3>
+        <ul>
+          <li>Trẻ em dưới 1m: Miễn phí vé (Ngồi chung ghế với bố mẹ).</li>
+          <li>Trẻ em từ 1m - 1m3: Tính 50% giá vé người lớn.</li>
+          <li>Trẻ em trên 1m3: Tính vé như người lớn.</li>
+        </ul>
+        <p>
+          <em
+            >Quý khách đi đoàn đông vui lòng liên hệ trực tiếp để có giá ưu đãi
+            nhất hoặc để thuê bao nguyên chiếc thuyền rồng riêng biệt.</em
+          >
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-contact">
+            <p><strong>Văn phòng:</strong> 123 Lê Lợi, Huế</p>
+            <p><strong>Hotline:</strong> 090 123 4567</p>
+          </div>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Hue Transport Services. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mainImage = document.getElementById("mainImage");
+        const thumbnails = document.querySelectorAll(".thumbnail-list img");
+
+        thumbnails.forEach((thumb) => {
+          thumb.addEventListener("click", function () {
+            thumbnails.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            const newImageSrc = this.getAttribute("data-large");
+            mainImage.style.opacity = "0.7";
+
+            setTimeout(() => {
+              mainImage.src = newImageSrc;
+              mainImage.style.opacity = "1";
+            }, 150);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

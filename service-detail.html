@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết dịch vụ - Hue Transport Services</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === KẾT THỪA STYLE CƠ BẢN TỪ TRANG CHỦ === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+      body {
+        color: #333;
+        background-color: #fcfcfc;
+        line-height: 1.6;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* === HEADER === */
+      header {
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        color: #6d4c41;
+        font-size: 20px;
+      }
+      .logo i {
+        font-size: 28px;
+        margin-right: 10px;
+        color: #d4a373;
+      }
+      nav ul {
+        display: flex;
+        gap: 25px;
+      }
+      nav ul li a {
+        font-weight: 600;
+        font-size: 15px;
+        transition: color 0.3s;
+        text-transform: uppercase;
+      }
+      nav ul li a:hover {
+        color: #d4a373;
+      }
+
+      /* === BREADCRUMB === */
+      .breadcrumb {
+        padding: 20px 0;
+        font-size: 14px;
+        color: #666;
+      }
+      .breadcrumb a {
+        color: #a67c52;
+        font-weight: 600;
+      }
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      /* === CHI TIẾT SẢN PHẨM / DỊCH VỤ === */
+      .service-detail {
+        padding: 40px 0;
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      /* Cột trái: Hình ảnh */
+      .service-gallery {
+        flex: 1;
+        min-width: 300px;
+      }
+      .main-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .thumbnail-list {
+        display: flex;
+        gap: 10px;
+      }
+      .thumbnail-list img {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+      .thumbnail-list img:hover {
+        border-color: #a67c52;
+      }
+
+      /* Cột phải: Thông tin & Đặt hàng */
+      .service-info {
+        flex: 1;
+        min-width: 300px;
+      }
+      .service-info h1 {
+        font-size: 32px;
+        color: #222;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+      .service-info .price {
+        font-size: 28px;
+        font-weight: 700;
+        color: #b71c1c;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .short-desc {
+        margin-bottom: 25px;
+        color: #555;
+      }
+
+      .features-list {
+        margin-bottom: 30px;
+      }
+      .features-list li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .features-list i {
+        color: #2e7d32;
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      /* Khung liên hệ / Đặt xe */
+      .booking-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border-top: 4px solid #a67c52;
+      }
+      .booking-card h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      .btn-large {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: #a67c52;
+        color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        border: none;
+        margin-bottom: 15px;
+      }
+      .btn-large:hover {
+        background-color: #8b633e;
+      }
+      .btn-zalo {
+        background-color: #0068ff;
+      }
+      .btn-zalo:hover {
+        background-color: #0056d6;
+      }
+
+      /* Phần Tab Nội dung chi tiết dưới cùng */
+      .content-section {
+        margin-top: 50px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+      .content-section h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        color: #4a301e;
+      }
+      .content-section p {
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+
+      /* === FOOTER === */
+      footer {
+        background-color: #4a301e;
+        color: #fff;
+        padding: 40px 0 20px;
+        font-size: 14px;
+        margin-top: 60px;
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .footer-social a {
+        color: #fff;
+        font-size: 20px;
+        margin: 0 10px;
+        transition: 0.3s;
+      }
+      .footer-social a:hover {
+        color: #d4a373;
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .visitor-counter {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .visitor-counter span {
+        font-weight: bold;
+        font-family: monospace;
+        font-size: 16px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .header-inner {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .service-detail {
+          flex-direction: column;
+        }
+        .footer-inner,
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="fa-solid fa-dharmachakra"></i> HUE TRANSPORT
+        </a>
+        <nav>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="index.html#services" class="active">Dịch vụ</a></li>
+            <li><a href="#">Bảng giá</a></li>
+            <li><a href="#">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a> &nbsp; / &nbsp;
+        <a href="index.html#services">Dịch vụ</a> &nbsp; / &nbsp;
+        <span>Thuê xe máy tại Huế</span>
+      </div>
+    </div>
+
+    <main class="container">
+      <div class="service-detail">
+        <div class="service-gallery">
+          <img
+            src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80"
+            alt="Thuê xe máy Huế"
+            class="main-img"
+          />
+          <div class="thumbnail-list">
+            <img
+              src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=200&q=80"
+              alt="Thumb 1"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&w=200&q=80"
+              alt="Thumb 2"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=200&q=80"
+              alt="Thumb 3"
+            />
+          </div>
+        </div>
+
+        <div class="service-info">
+          <h1>Dịch vụ Thuê Xe Máy Đời Mới</h1>
+          <span class="price">100.000 VNĐ / Ngày</span>
+
+          <p class="short-desc">
+            Khám phá mọi ngõ ngách của Cố đô Huế một cách tự do và tiết kiệm
+            nhất. Chúng tôi cung cấp đa dạng các dòng xe tay ga, xe số đời mới,
+            được bảo dưỡng định kỳ, đảm bảo an toàn tuyệt đối cho chuyến đi của
+            bạn.
+          </p>
+
+          <ul class="features-list">
+            <li>
+              <i class="fa-solid fa-check-circle"></i> Giao và nhận xe tận nơi
+              miễn phí (Khách sạn, Ga tàu, Bến xe).
+            </li>
+            <li>
+              <i class="fa-solid fa-check-circle"></i> Miễn phí 02 mũ bảo hiểm
+              đạt chuẩn & 02 áo mưa.
+            </li>
+            <li>
+              <i class="fa-solid fa-check-circle"></i> Tặng kèm 1 lít xăng khi
+              giao xe.
+            </li>
+            <li>
+              <i class="fa-solid fa-check-circle"></i> Hỗ trợ sự cố kỹ thuật
+              trên đường 24/7.
+            </li>
+          </ul>
+
+          <div class="booking-card">
+            <h3>Bạn cần tư vấn hoặc đặt xe ngay?</h3>
+            <a href="tel:0901234567" class="btn-large"
+              ><i class="fa-solid fa-phone"></i> Gọi ngay: 090 123 4567</a
+            >
+            <a
+              href="https://zalo.me/0901234567"
+              target="_blank"
+              class="btn-large btn-zalo"
+              ><i class="fa-solid fa-comment-dots"></i> Chat qua Zalo</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h2>Mô tả chi tiết & Thủ tục thuê xe</h2>
+        <p>
+          <strong>Thủ tục vô cùng đơn giản:</strong> Bạn chỉ cần để lại Căn cước
+          công dân (CCCD) hoặc Hộ chiếu (Passport) bản gốc. Đối với khách lưu
+          trú tại khách sạn, bạn có thể thông qua lễ tân để thuê xe mà không cần
+          cọc tiền.
+        </p>
+
+        <p>
+          <strong>Quy định về thời gian:</strong> Thời gian thuê 1 ngày được
+          tính là 24 tiếng kể từ lúc nhận xe. Nếu quá giờ sẽ tính thêm phụ phí
+          (10.000đ - 15.000đ/giờ tùy loại xe). Vui lòng kiểm tra kỹ xe trước khi
+          nhận.
+        </p>
+
+        <p><strong>Các dòng xe hiện có:</strong></p>
+        <ul>
+          <li>
+            - Xe số (Sirius, Wave Alpha, Blade): Phù hợp đi đường đèo, dốc như
+            đèo Hải Vân.
+          </li>
+          <li>
+            - Xe tay ga (Air Blade, Vision, Lead): Phù hợp di chuyển nhẹ nhàng
+            trong nội thành, tham quan lăng tẩm.
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-contact">
+            <p><strong>Văn phòng:</strong> 123 Lê Lợi, Huế</p>
+            <p><strong>Hotline:</strong> 090 123 4567</p>
+          </div>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Hue Transport Services. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

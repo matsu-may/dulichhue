@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết Tour Xích lô & Ẩm thực Huế - Hue Transport Services</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === KẾT THỪA STYLE CƠ BẢN TỪ TRANG CHỦ === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+      body {
+        color: #333;
+        background-color: #fcfcfc;
+        line-height: 1.6;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* === HEADER === */
+      header {
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        color: #6d4c41;
+        font-size: 20px;
+      }
+      .logo i {
+        font-size: 28px;
+        margin-right: 10px;
+        color: #d4a373;
+      }
+      nav ul {
+        display: flex;
+        gap: 25px;
+      }
+      nav ul li a {
+        font-weight: 600;
+        font-size: 15px;
+        transition: color 0.3s;
+        text-transform: uppercase;
+      }
+      nav ul li a:hover {
+        color: #d4a373;
+      }
+
+      /* === BREADCRUMB === */
+      .breadcrumb {
+        padding: 20px 0;
+        font-size: 14px;
+        color: #666;
+      }
+      .breadcrumb a {
+        color: #a67c52;
+        font-weight: 600;
+      }
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      /* === CHI TIẾT SẢN PHẨM / DỊCH VỤ === */
+      .service-detail {
+        padding: 40px 0;
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      /* Cột trái: Hình ảnh */
+      .service-gallery {
+        flex: 1;
+        min-width: 300px;
+      }
+      .main-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.3s ease;
+      }
+      .thumbnail-list {
+        display: flex;
+        gap: 10px;
+      }
+      .thumbnail-list img {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+      .thumbnail-list img:hover,
+      .thumbnail-list img.active {
+        border-color: #a67c52;
+      }
+
+      /* Cột phải: Thông tin & Đặt hàng */
+      .service-info {
+        flex: 1;
+        min-width: 300px;
+      }
+      .service-info h1 {
+        font-size: 32px;
+        color: #222;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+      .service-info .price {
+        font-size: 28px;
+        font-weight: 700;
+        color: #b71c1c;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .short-desc {
+        margin-bottom: 25px;
+        color: #555;
+      }
+
+      .features-list {
+        margin-bottom: 30px;
+      }
+      .features-list li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .features-list i {
+        color: #2e7d32;
+        margin-right: 10px;
+        font-size: 18px;
+        width: 20px;
+        text-align: center;
+      }
+
+      /* Khung liên hệ / Đặt xe */
+      .booking-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border-top: 4px solid #a67c52;
+      }
+      .booking-card h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      .btn-large {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: #a67c52;
+        color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        border: none;
+        margin-bottom: 15px;
+      }
+      .btn-large:hover {
+        background-color: #8b633e;
+      }
+      .btn-zalo {
+        background-color: #0068ff;
+      }
+      .btn-zalo:hover {
+        background-color: #0056d6;
+      }
+
+      /* Phần Tab Nội dung chi tiết dưới cùng */
+      .content-section {
+        margin-top: 50px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+      .content-section h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        color: #4a301e;
+      }
+      .content-section p {
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+      .content-section ul {
+        margin-left: 20px;
+        margin-bottom: 15px;
+        list-style-type: none;
+        padding: 0;
+      }
+      .content-section ul li {
+        margin-bottom: 12px;
+        padding-left: 15px;
+        position: relative;
+      }
+      .content-section ul li::before {
+        content: "•";
+        color: #a67c52;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      /* === FOOTER === */
+      footer {
+        background-color: #4a301e;
+        color: #fff;
+        padding: 40px 0 20px;
+        font-size: 14px;
+        margin-top: 60px;
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .footer-social a {
+        color: #fff;
+        font-size: 20px;
+        margin: 0 10px;
+        transition: 0.3s;
+      }
+      .footer-social a:hover {
+        color: #d4a373;
+      }
+      .footer-bottom {
+        text-align: center;
+        color: #ccc;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .header-inner {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .service-detail {
+          flex-direction: column;
+        }
+        .footer-inner {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <i class="fa-solid fa-dharmachakra"></i> HUE TRANSPORT
+        </a>
+        <nav>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="index.html#services">Dịch vụ</a></li>
+            <li><a href="#">Bảng giá</a></li>
+            <li><a href="index.html#tours" class="active">Tour gợi ý</a></li>
+            <li><a href="#">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a> &nbsp; / &nbsp;
+        <a href="index.html#tours">Tour gợi ý</a> &nbsp; / &nbsp;
+        <span>Tour Xích lô & Ẩm thực Huế</span>
+      </div>
+    </div>
+
+    <main class="container">
+      <div class="service-detail">
+        <div class="service-gallery">
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+            alt="Ẩm thực Huế"
+            class="main-img"
+            id="mainImage"
+          />
+          <div class="thumbnail-list">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=200&q=80"
+              data-large="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+              alt="Món ăn Huế"
+              class="active"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?auto=format&fit=crop&w=200&q=80"
+              data-large="https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?auto=format&fit=crop&w=800&q=80"
+              alt="Xích lô Huế"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1582878826629-29b7ad1cb438?auto=format&fit=crop&w=200&q=80"
+              data-large="https://images.unsplash.com/photo-1582878826629-29b7ad1cb438?auto=format&fit=crop&w=800&q=80"
+              alt="Bún bò Huế"
+            />
+          </div>
+        </div>
+
+        <div class="service-info">
+          <h1>Tour Xích Lô Khám Phá Ẩm Thực Cố Đô</h1>
+          <span class="price">450.000 VNĐ / Khách</span>
+
+          <p class="short-desc">
+            Kết hợp hoàn hảo giữa việc dạo ngắm phố phường chầm chậm trên chiếc
+            xích lô truyền thống và hành trình len lỏi vào các con hẻm nhỏ để
+            thưởng thức 5 món ăn đặc sản nức tiếng nhất của Huế.
+          </p>
+
+          <ul class="features-list">
+            <li>
+              <i class="fa-solid fa-clock"></i> Thời lượng: 4 tiếng (Khởi hành
+              Sáng hoặc Chiều tối).
+            </li>
+            <li>
+              <i class="fa-solid fa-bowl-food"></i> Đã bao gồm toàn bộ chi phí
+              ăn uống 5 món đặc sản.
+            </li>
+            <li>
+              <i class="fa-solid fa-bicycle"></i> Bác tài xích lô kiêm hướng dẫn
+              viên bản địa nhiệt tình.
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot"></i> Đón/trả khách tận nơi
+              miễn phí tại các khách sạn trung tâm.
+            </li>
+          </ul>
+
+          <div class="booking-card">
+            <h3>Bạn đi nhóm đông người? Nhận ngay ưu đãi</h3>
+            <a href="tel:0901234567" class="btn-large"
+              ><i class="fa-solid fa-phone"></i> Gọi ngay: 090 123 4567</a
+            >
+            <a
+              href="https://zalo.me/0901234567"
+              target="_blank"
+              class="btn-large btn-zalo"
+              ><i class="fa-solid fa-comment-dots"></i> Chat qua Zalo để đặt
+              tour</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h2>Lịch Trình Chi Tiết Tour Ẩm Thực (Tham khảo suất Chiều)</h2>
+
+        <p>
+          <strong>15:00 - Đón khách:</strong> Xe xích lô đón quý khách tại điểm
+          hẹn (khách sạn trung tâm). Bắt đầu hành trình dạo qua cầu Trường Tiền,
+          ngắm nhìn sông Hương thơ mộng.
+        </p>
+
+        <p>
+          <strong>15:30 - Thưởng thức các loại bánh Huế:</strong> Ghé vào quán
+          bánh bèo, nậm, lọc gia truyền. Thưởng thức hương vị tinh tế của bột
+          gạo, nhân tôm thịt đậm đà hòa quyện với nước mắm ớt cay xé lưỡi.
+        </p>
+
+        <p>
+          <strong>16:30 - Bánh khoái giòn rụm:</strong> Xích lô đưa quý khách
+          qua khu vực cửa Thượng Tứ để thưởng thức bánh khoái đổ giòn tan, ăn
+          kèm rau sống và nước lèo đậu phộng đặc biệt.
+        </p>
+
+        <p>
+          <strong>17:30 - Bún Bò Huế:</strong> Món ăn không thể bỏ qua. Xích lô
+          len lỏi qua các con phố nhỏ để đến quán Bún bò Huế chuẩn vị địa phương
+          với nước dùng ngọt thanh từ xương, chả cua và thịt bắp.
+        </p>
+
+        <p>
+          <strong>18:15 - Tráng miệng Chè hẻm & Cà phê muối:</strong> Quý khách
+          giải nhiệt với ly chè Huế đa dạng (chè bắp, chè hạt sen, hoặc chè bột
+          lọc bọc heo quay độc lạ). Cuối cùng, nhâm nhi ly Cà phê muối đặc trưng
+          của xứ Huế bên bờ sông Hương.
+        </p>
+
+        <p>
+          <strong>19:00 - Trả khách:</strong> Kết thúc chương trình, bác tài
+          xích lô đưa quý khách về lại khách sạn nghỉ ngơi hoặc trả tại chợ đêm
+          (theo yêu cầu).
+        </p>
+
+        <br />
+        <h3>Lưu ý dành cho du khách:</h3>
+        <ul>
+          <li>
+            Thực đơn có thể linh hoạt thay đổi (bánh canh Nam Phổ, bún thịt
+            nướng, nem lụi...) tùy thuộc vào sở thích của quý khách.
+          </li>
+          <li>
+            Vui lòng thông báo trước cho chúng tôi nếu quý khách có dị ứng với
+            bất kỳ thành phần thức ăn nào hoặc có nhu cầu ăn chay.
+          </li>
+          <li>
+            Mỗi xe xích lô chở tối đa 1 người lớn để đảm bảo sự thoải mái trong
+            suốt 4 tiếng di chuyển.
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-contact">
+            <p><strong>Văn phòng:</strong> 123 Lê Lợi, Huế</p>
+            <p><strong>Hotline:</strong> 090 123 4567</p>
+          </div>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Hue Transport Services. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mainImage = document.getElementById("mainImage");
+        const thumbnails = document.querySelectorAll(".thumbnail-list img");
+
+        thumbnails.forEach((thumb) => {
+          thumb.addEventListener("click", function () {
+            thumbnails.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            const newImageSrc = this.getAttribute("data-large");
+            mainImage.style.opacity = "0.7";
+
+            setTimeout(() => {
+              mainImage.src = newImageSrc;
+              mainImage.style.opacity = "1";
+            }, 150);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
