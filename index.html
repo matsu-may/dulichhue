@@ -521,26 +521,23 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // 1. Kiểm tra xem trong Local Storage đã lưu số đếm chưa
-        let currentCount = localStorage.getItem("website_visits");
+        // Sử dụng một API miễn phí để đếm. Đổi 'dulichhue' thành tên bất kỳ bạn muốn để làm ID duy nhất.
+        const namespace = "dulichhue-vercel-app";
+        const key = "homepage-visits";
 
-        // 2. Nếu chưa có (người dùng mới hoàn toàn), khởi tạo một số nền tảng (ví dụ: 1245678)
-        if (!currentCount) {
-          currentCount = 1245678;
-        } else {
-          // Nếu đã có, chuyển đổi chuỗi thành số nguyên
-          currentCount = parseInt(currentCount);
-        }
-
-        // 3. Mỗi lần F5/tải trang, cộng thêm 1
-        currentCount++;
-
-        // 4. Lưu con số mới vào lại Local Storage
-        localStorage.setItem("website_visits", currentCount);
-
-        // 5. Cập nhật con số lên giao diện HTML, định dạng thêm dấu phẩy (ví dụ: 1,245,679)
-        document.getElementById("visit-count").innerText =
-          currentCount.toLocaleString("en-US");
+        // Gọi API để tự động tăng số và lấy kết quả về
+        fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Hiển thị con số thực tế trả về từ máy chủ
+            document.getElementById("visit-count").innerText =
+              data.count.toLocaleString("en-US");
+          })
+          .catch((error) => {
+            console.error("Lỗi khi tải bộ đếm:", error);
+            document.getElementById("visit-count").innerText =
+              "Đang cập nhật...";
+          });
       });
     </script>
   </body>
