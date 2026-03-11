@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hue Transport Services</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === RESET & CƠ BẢN === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      body {
+        color: #333;
+        background-color: #fcfcfc;
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* === HEADER === */
+      header {
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        color: #6d4c41; /* Màu nâu đồng */
+        font-size: 20px;
+      }
+
+      .logo i {
+        font-size: 28px;
+        margin-right: 10px;
+        color: #d4a373;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 25px;
+      }
+
+      nav ul li a {
+        font-weight: 600;
+        font-size: 15px;
+        transition: color 0.3s;
+        text-transform: uppercase;
+      }
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        color: #d4a373;
+      }
+
+      /* === HERO SECTION === */
+      .hero {
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+          url("https://images.unsplash.com/photo-1559592413-7cea4ee858f1?auto=format&fit=crop&w=1920&q=80")
+            center/cover no-repeat;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        color: #fff;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+      }
+
+      .hero p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        max-width: 600px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        text-transform: uppercase;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        background-color: #a67c52;
+        color: #fff;
+        border: 2px solid #a67c52;
+      }
+
+      .btn-primary:hover {
+        background-color: #8b633e;
+        border-color: #8b633e;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+        margin-left: 15px;
+      }
+
+      .btn-outline:hover {
+        background-color: #fff;
+        color: #333;
+      }
+
+      /* === TIÊU ĐỀ SECTION === */
+      .section-title {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        color: #222;
+      }
+
+      /* === SERVICES & TOURS === */
+      .services,
+      .tours {
+        padding: 60px 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        padding-bottom: 20px;
+        transition: transform 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .card-content {
+        padding: 15px;
+      }
+
+      .card h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .card p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        font-weight: 700;
+        color: #000;
+        margin-bottom: 15px !important;
+      }
+
+      .btn-sm {
+        padding: 8px 20px;
+        background-color: #5c3a21;
+        color: #fff;
+        border-radius: 20px;
+        font-size: 12px;
+      }
+
+      .btn-sm:hover {
+        background-color: #3a2212;
+      }
+
+      /* === TẠI SAO CHỌN CHÚNG TÔI === */
+      .features {
+        background-color: #f5f5f5;
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .feature-item i {
+        font-size: 40px;
+        color: #5c3a21;
+        margin-bottom: 15px;
+      }
+
+      .feature-item h4 {
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      /* === TOUR GỢI Ý (Bản to hơn) === */
+      .tour-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      }
+
+      .tour-card img {
+        height: 250px;
+      }
+
+      /* === FOOTER === */
+      footer {
+        background-color: #4a301e;
+        color: #fff;
+        padding: 40px 0 20px;
+        font-size: 14px;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+
+      .footer-social a {
+        color: #fff;
+        font-size: 20px;
+        margin: 0 10px;
+        transition: 0.3s;
+      }
+
+      .footer-social a:hover {
+        color: #d4a373;
+      }
+
+      .footer-payment i {
+        font-size: 24px;
+        margin-left: 10px;
+      }
+
+      /* --- PHẦN LƯỢT TRUY CẬP (VISITOR COUNTER) --- */
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .visitor-counter {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .visitor-counter i {
+        color: #d4a373;
+      }
+
+      .visitor-counter span {
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-family: monospace;
+        font-size: 16px;
+      }
+
+      /* === RESPONSIVE === */
+      @media (max-width: 768px) {
+        .header-inner {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .btn-outline {
+          margin-left: 0;
+          margin-top: 10px;
+          display: block;
+          width: fit-content;
+        }
+        .tour-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-inner,
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <div class="logo">
+          <i class="fa-solid fa-dharmachakra"></i> HUE TRANSPORT SERVICES
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#" class="active">Trang chủ</a></li>
+            <li><a href="#services">Dịch vụ</a></li>
+            <li><a href="#">Bảng giá</a></li>
+            <li><a href="#tours">Tour gợi ý</a></li>
+            <li><a href="#">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h1>Khám phá cố đô Huế<br />theo cách của bạn</h1>
+        <p>
+          Thuê xe máy, ô tô, xích lô, thuyền rồng. Giá tốt nhất. Dịch vụ uy tín
+          chuyên nghiệp.
+        </p>
+        <div class="buttons">
+          <a href="#" class="btn btn-primary">Thuê xe ngay</a>
+          <a href="#services" class="btn btn-outline">Xem các dịch vụ</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="grid">
+          <div class="card">
+            <img
+              src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80"
+              alt="Thuê xe máy"
+            />
+            <div class="card-content">
+              <h3>Thuê xe máy</h3>
+              <p>Hơn 100 xe đời mới, giao tận nơi.</p>
+              <p class="price">Giá từ: 100.000 VNĐ/ngày</p>
+              <a href="#" class="btn btn-sm">XEM CHI TIẾT</a>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80"
+              alt="Thuê ô tô"
+            />
+            <div class="card-content">
+              <h3>Thuê ô tô</h3>
+              <p>Tự lái hoặc có tài xế. Tour lăng tẩm, sân bay.</p>
+              <p class="price">Giá từ: 700.000 VNĐ/ngày</p>
+              <a href="#" class="btn btn-sm">XEM CHI TIẾT</a>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?auto=format&fit=crop&w=800&q=80"
+              alt="Xích lô Huế"
+            />
+            <div class="card-content">
+              <h3>Xích lô Huế</h3>
+              <p>Dạo quanh Đại Nội, chợ Đông Ba. Trải nghiệm chậm rãi.</p>
+              <p class="price">Giá từ: 50.000 VNĐ/lượt</p>
+              <a href="#" class="btn btn-sm">XEM CHI TIẾT</a>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80"
+              alt="Thuyền rồng sông Hương"
+            />
+            <div class="card-content">
+              <h3>Thuyền rồng</h3>
+              <p>Nghe ca Huế, thả hoa đăng. Tour chùa Thiên Mụ.</p>
+              <p class="price">Giá từ: 100.000 VNĐ/khách</p>
+              <a href="#" class="btn btn-sm">XEM CHI TIẾT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">Tại sao chọn chúng tôi</h2>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <i class="fa-solid fa-car-side"></i>
+            <h4>Xe đời mới</h4>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-user-tie"></i>
+            <h4>Lái xe chuyên nghiệp</h4>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <h4>Giá cả cạnh tranh</h4>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-headset"></i>
+            <h4>Dịch vụ 24/7</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tours" class="tours">
+      <div class="container">
+        <h2 class="section-title">Tour Dịch vụ gợi ý</h2>
+        <div class="grid tour-grid">
+          <div class="card tour-card">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+              alt="Tour Xích lô"
+            />
+            <div class="card-content">
+              <h3>Tour Xích lô & Ẩm thực Huế</h3>
+              <p>4 giờ khám phá, 5 món ăn đặc sản.</p>
+              <p class="price">Giá: 450.000 VNĐ/khách</p>
+            </div>
+          </div>
+          <div class="card tour-card">
+            <img
+              src="https://images.unsplash.com/photo-1520188740392-671c08eb5430?auto=format&fit=crop&w=800&q=80"
+              alt="Tour Thuyền rồng"
+            />
+            <div class="card-content">
+              <h3>Tour Thuyền rồng nghe ca Huế</h3>
+              <p>1 giờ trên sông, thả hoa đăng.</p>
+              <p class="price">Giá: 100.000 VNĐ/khách</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-contact">
+            <p><strong>Văn phòng:</strong> 123 Lê Lợi, Huế</p>
+            <p><strong>Hotline:</strong> 090 123 4567</p>
+          </div>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+          <div class="footer-payment">
+            <span>Phương thức thanh toán:</span>
+            <i class="fa-brands fa-cc-visa"></i>
+            <i class="fa-brands fa-cc-mastercard"></i>
+            <i class="fa-brands fa-cc-paypal"></i>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Hue Transport Services. All rights reserved.</p>
+          <div class="visitor-counter">
+            <i class="fa-solid fa-chart-line"></i>
+            Tổng lượt truy cập: <span>1,245,678</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
