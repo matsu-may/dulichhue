@@ -346,6 +346,58 @@
           text-align: center;
         }
       }
+      .map-wrapper {
+        padding: 60px 0;
+        background: #f5f5f5;
+      }
+      .search-box {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .input-group i {
+        position: absolute;
+        left: 15px;
+        color: #a67c52;
+      }
+      .controls {
+        width: 100%;
+        padding: 12px 12px 12px 40px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .map-buttons {
+        display: flex;
+        gap: 10px;
+      }
+      .btn-map {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        background: #5c3a21;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-food {
+        background: #e67e22;
+      }
+      .btn-map:hover {
+        opacity: 0.8;
+      }
     </style>
   </head>
   <body>
@@ -487,6 +539,56 @@
       </div>
     </section>
 
+    <div class="map-wrapper">
+      <div class="container">
+        <h2 class="section-title">Tìm đường & Khám phá ẩm thực</h2>
+
+        <div class="search-box">
+          <div class="input-group">
+            <i class="fa-solid fa-location-dot"></i>
+            <input
+              id="origin-input"
+              class="controls"
+              type="text"
+              placeholder="Nhập điểm đón (vị trí hiện tại)..."
+            />
+          </div>
+          <div class="input-group">
+            <i class="fa-solid fa-flag-checkered"></i>
+            <input
+              id="destination-input"
+              class="controls"
+              type="text"
+              placeholder="Nhập điểm đến (lăng tẩm, khách sạn)..."
+            />
+          </div>
+          <div class="map-buttons">
+            <button id="btn-route" class="btn-map">
+              <i class="fa-solid fa-route"></i> Tìm đường
+            </button>
+            <button id="btn-food" class="btn-map btn-food">
+              <i class="fa-solid fa-utensils"></i> Gợi ý ẩm thực gần đây
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="googleMap"
+          style="
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          "
+        ></div>
+
+        <div id="infowindow-content" style="display: none">
+          <span id="place-name" style="font-weight: bold"></span><br />
+          <span id="place-address"></span>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <div class="container">
         <div class="footer-inner">
@@ -539,5 +641,105 @@
           });
       });
     </script>
+    <script>
+      let map, directionsService, directionsRenderer, placesService, infoWindow;
+
+      function initMap() {
+        // Khởi tạo bản đồ tâm tại Huế
+        const hueCenter = { lat: 16.4637, lng: 107.5909 };
+        map = new google.maps.Map(document.getElementById("googleMap"), {
+          zoom: 14,
+          center: hueCenter,
+          mapTypeControl: false,
+        });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        // Tự động gợi ý địa danh khi gõ (Autocomplete)
+        const originInput = document.getElementById("origin-input");
+        const destInput = document.getElementById("destination-input");
+
+        new google.maps.places.Autocomplete(originInput);
+        new google.maps.places.Autocomplete(destInput);
+
+        // Xử lý Tìm đường
+        document.getElementById("btn-route").addEventListener("click", () => {
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
+        });
+
+        // Xử lý Gợi ý ẩm thực (Places API)
+        infoWindow = new google.maps.InfoWindow();
+        placesService = new google.maps.places.PlacesService(map);
+
+        document
+          .getElementById("btn-food")
+          .addEventListener("click", findFoodNearby);
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        const origin = document.getElementById("origin-input").value;
+        const destination = document.getElementById("destination-input").value;
+
+        if (!origin || !destination) {
+          alert("Vui lòng nhập đầy đủ điểm đón và điểm đến!");
+          return;
+        }
+
+        directionsService.route(
+          {
+            origin: origin,
+            destination: destination,
+            travelMode: google.maps.TravelMode.DRIVING,
+          },
+          (response, status) => {
+            if (status === "OK") {
+              directionsRenderer.setDirections(response);
+            } else {
+              alert("Không thể tìm thấy lộ trình: " + status);
+            }
+          },
+        );
+      }
+
+      function findFoodNearby() {
+        const request = {
+          location: map.getCenter(),
+          radius: "1000", // Tìm trong bán kính 1km quanh tâm bản đồ
+          type: ["restaurant"],
+        };
+
+        placesService.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+              createMarker(results[i]);
+            }
+            map.setZoom(15);
+          }
+        });
+      }
+
+      function createMarker(place) {
+        const marker = new google.maps.Marker({
+          map,
+          position: place.geometry.location,
+          icon: "https://maps.google.com/mapfiles/kml/pal2/icon32.png", // Icon đồ ăn
+        });
+
+        google.maps.event.addListener(marker, "click", () => {
+          infoWindow.setContent(
+            `<strong>${place.name}</strong><br>Đánh giá: ${place.rating || "N/A"} ⭐`,
+          );
+          infoWindow.open(map, marker);
+        });
+      }
+    </script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"
+      async
+      defer
+    ></script>
   </body>
 </html>
