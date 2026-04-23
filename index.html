@@ -745,37 +745,76 @@
           </div>
         </div>
 
-        <div class="footer-bottom" style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 15px;">
-                    <p>&copy; 2026 Hue Transport Services. All rights reserved.</p>
-                    <div class="visitor-counter">
-                        <i class="fa-solid fa-chart-line"></i>
-                        Tổng lượt truy cập: <span id="visit-count">0</span>
-                    </div>
-                </div>
-                <a href="doi-ngu.html" class="btn btn-outline" style="margin: 0; padding: 6px 15px; font-size: 12px; border-color: rgba(255,255,255,0.3); color: #ccc;"><i class="fa-solid fa-users"></i> Đội ngũ thực hiện</a>
+        <div
+          class="footer-bottom"
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 15px;
+            "
+          >
+            <p>&copy; 2026 Hue Transport Services. All rights reserved.</p>
+            <div class="visitor-counter">
+              <i class="fa-solid fa-chart-line"></i>
+              Tổng lượt truy cập: <span id="visit-count">0</span>
             </div>
+          </div>
+          <a
+            href="doi-ngu.html"
+            class="btn btn-outline"
+            style="
+              margin: 0;
+              padding: 6px 15px;
+              font-size: 12px;
+              border-color: rgba(255, 255, 255, 0.3);
+              color: #ccc;
+            "
+            ><i class="fa-solid fa-users"></i> Đội ngũ thực hiện</a
+          >
+        </div>
       </div>
     </footer>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Sử dụng một API miễn phí để đếm. Đổi 'dulichhue' thành tên bất kỳ bạn muốn để làm ID duy nhất.
-        const namespace = "dulichhue-vercel-app";
-        const key = "homepage-visits";
+        const countElement = document.getElementById("visits");
 
-        // Gọi API để tự động tăng số và lấy kết quả về
-        fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-          .then((response) => response.json())
+        // Định danh duy nhất cho trang web của bạn
+        // BẠN PHẢI THAY ĐỔI 'dulichhue12ly2' THÀNH MỘT CÁI TÊN KHÁC ĐỘC NHẤT
+        // Ví dụ: 'tran-viet-thong-project-hue'
+        const namespace = "dulichhue-vercel-app";
+        const key = "homepage";
+
+        // Gọi API
+        fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
           .then((data) => {
-            // Hiển thị con số thực tế trả về từ máy chủ
-            document.getElementById("visit-count").innerText =
-              data.count.toLocaleString("en-US");
+            // Nếu gọi API thành công, hiển thị số
+            countElement.innerText = data.value.toLocaleString("en-US");
           })
           .catch((error) => {
-            console.error("Lỗi khi tải bộ đếm:", error);
-            document.getElementById("visit-count").innerText =
-              "Đang cập nhật...";
+            // Nếu gọi API thất bại (bị chặn, API sập...), hiển thị thông báo thân thiện
+            console.error("Lỗi khi lấy bộ đếm:", error);
+            countElement.innerText = "Hệ thống bận";
           });
       });
     </script>
