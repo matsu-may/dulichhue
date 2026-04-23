@@ -791,28 +791,26 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Đảm bảo ID ở đây khớp 100% với HTML
         const countElement = document.getElementById("visit-count");
-
-        // Nếu không tìm thấy thẻ HTML, dừng chạy để tránh lỗi
         if (!countElement) return;
 
-        const namespace = "tran-viet-thong-project-hue";
+        // Nhớ đổi tên namespace thành tên nhóm của bạn nhé
+        const namespace = "tran-viet-thong-12ly2-hue";
         const key = "homepage";
 
-        // Gọi API đếm số (dùng counterapi.dev đang hoạt động)
-        fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+        // Gọi API mới (countapi.cc)
+        fetch(`https://api.countapi.cc/hit/${namespace}/${key}`)
           .then((response) => {
-            if (!response.ok) throw new Error("API đang bận");
+            if (!response.ok) throw new Error("Lỗi kết nối API");
             return response.json();
           })
           .then((data) => {
-            // API này trả kết quả về trong biến data.count
-            countElement.innerText = data.count.toLocaleString("en-US");
+            // Cập nhật số ra màn hình
+            countElement.innerText = data.value.toLocaleString("en-US");
           })
           .catch((error) => {
             console.error("Lỗi khi lấy bộ đếm:", error);
-            countElement.innerText = "Lỗi mạng";
+            countElement.innerText = "Lỗi (Tắt Adblock nhé)";
           });
       });
     </script>
