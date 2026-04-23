@@ -791,30 +791,28 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const countElement = document.getElementById("visits");
+        // Đảm bảo ID ở đây khớp 100% với HTML
+        const countElement = document.getElementById("visit-count");
 
-        // Định danh duy nhất cho trang web của bạn
-        // BẠN PHẢI THAY ĐỔI 'dulichhue12ly2' THÀNH MỘT CÁI TÊN KHÁC ĐỘC NHẤT
-        // Ví dụ: 'tran-viet-thong-project-hue'
-        const namespace = "dulichhue-vercel-app";
+        // Nếu không tìm thấy thẻ HTML, dừng chạy để tránh lỗi
+        if (!countElement) return;
+
+        const namespace = "tran-viet-thong-project-hue";
         const key = "homepage";
 
-        // Gọi API
-        fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+        // Gọi API đếm số (dùng counterapi.dev đang hoạt động)
+        fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
           .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
+            if (!response.ok) throw new Error("API đang bận");
             return response.json();
           })
           .then((data) => {
-            // Nếu gọi API thành công, hiển thị số
-            countElement.innerText = data.value.toLocaleString("en-US");
+            // API này trả kết quả về trong biến data.count
+            countElement.innerText = data.count.toLocaleString("en-US");
           })
           .catch((error) => {
-            // Nếu gọi API thất bại (bị chặn, API sập...), hiển thị thông báo thân thiện
             console.error("Lỗi khi lấy bộ đếm:", error);
-            countElement.innerText = "Hệ thống bận";
+            countElement.innerText = "Lỗi mạng";
           });
       });
     </script>
